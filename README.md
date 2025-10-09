@@ -4,5 +4,7 @@ Campus Route Navigator is a web-based application designed to help newcomers to 
 
 ## Features ##
 
-- The application will be account-based, allowing students to save schedules and routes.
-- Routes can have a number of stops, as well as including an estimated walking time.
+- User Account Management: The application will be account-based, allowing students to log in to see saved schedules and routes.
+- Schedule Management: Users can upload or manually input their schedules
+- Multi-Stop Routes: Routes can have a number of stops, as well as including an estimated walking time.
+- Interactive Map: Routes are displayed on a clear, interactive map of the UMass campus
