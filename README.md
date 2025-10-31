@@ -13,6 +13,46 @@ UMass Campus Navigator is a web-based application designed to help newcomers to 
 UMass Campus Navigator is a React-based project. As such, it requires both Node.js (created with v20.11.0) and npm (created with v10.2.4)
 It uses a [CHOOSE BACKEND LATER] backend
 
+The file structure is as follows:
+
+node_modules/   # local folder - dependencies are put here upon running `npm install`
+
+
+public/        # contains public files such as logos or downloadables
+
+
+src/            # contains most of the code for the project, contains:
+|
+|
++-- api/           # api files, links frontend to database
+|
+|
++-- components/    # shared components used across the entire application
+|
+|
++-- config/        # global configurations, exported env variables etc.
+|
+|
++-- models/        # object models and/or interfaces
+|
+|
++-- pages/         # individual web pages in the app, containing a folder for each page
+|
+|
++-- testing/       # test utilities and functions
+
+
+# Pages
+
+Each webpage's folder (within /pages/) has two files:
+- index.tsx               # the page's source code
+- index.module.scss       # the styling for the page
+
+What ever the folder is named will be the URL extension used to access that page
+- If the folder is called `login`, the page will be hosted at `localhost:3000/login`
+- Nesting pages works intuitively
+
+
 ## Running the Project ##
 - First, ensure you have npm and node installed
 - Run `npm install` to install dependencies
