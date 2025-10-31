@@ -8,7 +8,6 @@ import Main from './components/body/index.tsx';
 function App() {
   return (
     <div className='App'>
-      <div>aaaa</div>
       <NavBar />
       <Main /> 
     </div>
