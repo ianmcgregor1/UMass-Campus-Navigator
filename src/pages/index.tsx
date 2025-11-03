@@ -1,13 +1,18 @@
-
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './homepage';
+import AccountPage from './account';
 
-function HomePage() {
+const Main = () => {
   return (
-    <div>
-      <h1>Welcome to the Home Page!</h1>
-      <p>This is the home page.</p>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/account" element={<AccountPage />} />
+      {/* Add a route for any new pages here */}
+      
+      <Route path="*" element={<div><h1>404 - Page Not Found</h1></div>} />
+    </Routes>
   );
 }
 
-export default HomePage;
+export default Main;

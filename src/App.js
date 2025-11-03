@@ -1,7 +1,7 @@
 // src/App.js
 import React from 'react';
-import NavBar from './components/nav-bar/index.tsx';
-import Main from './components/body/index.tsx';
+import NavBar from './components/nav-bar';
+import Main from './pages';
 //import AboutPage from './pages/AboutPage';
 //import ContactPage from './pages/ContactPage';
 

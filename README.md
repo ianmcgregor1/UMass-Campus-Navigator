@@ -52,12 +52,13 @@ src/........... # contains most of the code for the project, contains:
 ## Pages
 
 Each webpage's folder (within /pages/) has two files:
-- index.tsx               # the page's source code
-- [pagename].module.scss       # the styling for the page
+- index.tsx................... # the page's source code
+- [pagename].module.scss...... # the styling for the page
 
-The name of the folder will be the URL extension used to access that page
-- If the folder is called `login`, the page will be hosted at `localhost:3000/login`
-- Nesting pages works intuitively
+The name of the folder should be the URL extension used to access that page
+- If the folder is called `login`, the page should be hosted at `localhost:3000/login`
+- When you add a new page, make sure to add its export - and the proper route - to `pages/index.tsx`
+- You probably want to add a link to the page in the navbar as well
 
 
 ## Running the Project ##
