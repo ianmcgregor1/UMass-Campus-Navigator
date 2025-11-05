@@ -1,0 +1,36 @@
+{
+  "locations": [
+    {
+      "name": "Worcester Dining Commons",
+      "location": {
+        "lat": 42.393407206843044,
+        "lng": -72.52551620916827
+      },
+      "type": "dining"
+    },
+    {
+      "name": "Franklin Dining Commons",
+      "location": {
+        "lat": 42.38940594570707, 
+        "lng": -72.5225431585022
+      },
+      "type": "dining"
+    },
+    {
+      "name": "Berkshire Dining Commons",
+      "location": {
+        "lat": 42.38195592139211,
+        "lng": -72.52996187212638
+      },
+      "type": "dining"
+    },
+    {
+      "name": "Hampshire Dining Commons",
+      "location": {
+        "lat": 42.38389356478541,
+        "lng": -72.53044466975199
+      },
+      "type": "dining"
+    }
+  ]
+}
