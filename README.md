@@ -11,7 +11,7 @@ UMass Campus Navigator is a web-based application designed to help newcomers to 
 
 # Structure
 UMass Campus Navigator is a React-based project. As such, it requires both Node.js (created with v20.11.0) and npm (created with v10.2.4)
-It uses a [CHOOSE BACKEND LATER] backend
+It uses a Node.js/Express backend with MySQL database
 
 The file structure is as follows:
 
@@ -48,6 +48,21 @@ src/........... # contains most of the code for the project, contains:
 +-- testing/.....  # test utilities and functions
 
 
+server/........ # Node.js backend server
+
+|
+
++-- config/....... # database connection
+
+|
+
++-- routes/....... # API route definitions
+
+|
+
++-- database/..... # SQL schema and seed data files
+
+
 
 ## Pages
 
@@ -62,10 +77,48 @@ The name of the folder should be the URL extension used to access that page
 
 
 ## Running the Project ##
-- First, ensure you have npm and node installed
-- Run `npm install` to install dependencies
-- [STEP TO START DB]
-- Run `npm start` to run the app in development mode at localhost:3000
+- First, ensure you have Node.js (includes npm) and MySQL installed
+  - For MySQL: Download from https://dev.mysql.com/downloads/installer/ and choose Developer Default install type
+- Run `npm install` to install dependencies (maybe need to include --legacy-peer-deps)
+- Run `npm run setup-db` to create the database and add sample data (only need to run this once)
+- Run `npm run dev` to run both frontend and backend together
+- Frontend runs at `localhost:3000`, backend API runs at `localhost:5000`
+- Alternatively: `npm start` for frontend only, or `npm run server` for backend only
+
+## API Documentation ##
+
+### Base URL
+- Backend runs at `http://localhost:5000`
+- All endpoints are prefixed with `/api`
+
+### Endpoints
+
+#### Users
+```
+GET    /api/users              Get all users
+GET    /api/users/:id          Get specific user
+POST   /api/users              Create new user
+PUT    /api/users/:id          Update user
+DELETE /api/users/:id          Delete user
+```
+
+#### Routes (nested under users)
+```
+GET    /api/users/:userId/routes                    Get all routes for a user
+GET    /api/users/:userId/routes/:routeId           Get specific route with all its locations
+POST   /api/users/:userId/routes                    Create new route for user
+PUT    /api/users/:userId/routes/:routeId           Update route (must belong to user)
+DELETE /api/users/:userId/routes/:routeId           Delete route (must belong to user)
+```
+
+#### Locations (nested under routes)
+```
+GET    /api/users/:userId/routes/:routeId/locations                Get all locations in a route
+GET    /api/users/:userId/routes/:routeId/locations/:locationId    Get specific location
+POST   /api/users/:userId/routes/:routeId/locations                Create location in route
+PUT    /api/users/:userId/routes/:routeId/locations/:locationId    Update location
+DELETE /api/users/:userId/routes/:routeId/locations/:locationId    Delete location
+```
 
 ## Running Tests ##
 - `npm test` launches the test runner in the interactive watch mode
