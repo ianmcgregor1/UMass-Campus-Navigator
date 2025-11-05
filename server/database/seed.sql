@@ -2,36 +2,27 @@
 USE umass_navigator;
 
 -- Sample users (password is 'password123' for all)
-INSERT INTO users (name, password) VALUES 
-  ('John Smith', 'password123'),
-  ('Jane Doe', 'password123'),
-  ('Bob Wilson', 'password123');
+INSERT INTO users (name, email, passwordHash) VALUES 
+  ('John Smith', 'sample email 1', 'password123'),
+  ('Jane Doe', 'sample email 2', 'password123'),
+  ('Bob Wilson', 'sample email 3', 'password123');
 
+
+-- Sample locations
+INSERT INTO locations (name, location, type) VALUES
+  ('Southwest Dorms', '{\"lat\": 42.3868, \"lng\": -72.5301}', 'residential'),
+  ('Computer Science Building', '{\"lat\": 42.3908, \"lng\": -72.5267}', 'academic'),
+  ('Lederle Graduate Research Center', '{\"lat\": 42.3914, \"lng\": -72.5258}', 'academic'),
+  ('Hasbrouck Laboratory', '{\"lat\": 42.3900, \"lng\": -72.5289}', 'academic'),
+  ('Central Dorms', '{\"lat\": 42.3925, \"lng\": -72.5242}', 'residential'),
+  ('Goessmann Laboratory', '{\"lat\": 42.3897, \"lng\": -72.5277}', 'academic'),
+  ('Morrill Science Center', '{\"lat\": 42.3902, \"lng\": -72.5253}', 'academic'),
+  ('Northeast Dorms', '{\"lat\": 42.3951, \"lng\": -72.5230}', 'residential'),
+  ('Thompson Hall', '{\"lat\": 42.3917, \"lng\": -72.5291}', 'residential');
+    
 -- Sample routes
-INSERT INTO routes (name, user_id) VALUES
-  ('Monday Classes', 1),
-  ('Tuesday Classes', 1),
-  ('Lab Route', 2),
-  ('Economics Route', 3);
-
--- Sample locations for John's Monday route (route_id = 1)
-INSERT INTO locations (name, latitude, longitude, route_id) VALUES
-  ('Southwest Dorms', 42.3868, -72.5301, 1),
-  ('Computer Science Building', 42.3908, -72.5267, 1),
-  ('Lederle Graduate Research Center', 42.3914, -72.5258, 1);
-
--- Sample locations for John's Tuesday route (route_id = 2)
-INSERT INTO locations (name, latitude, longitude, route_id) VALUES
-  ('Southwest Dorms', 42.3868, -72.5301, 2),
-  ('Hasbrouck Laboratory', 42.3900, -72.5289, 2);
-
--- Sample locations for Jane's Lab route (route_id = 3)
-INSERT INTO locations (name, latitude, longitude, route_id) VALUES
-  ('Central Dorms', 42.3925, -72.5242, 3),
-  ('Goessmann Laboratory', 42.3897, -72.5277, 3),
-  ('Morrill Science Center', 42.3902, -72.5253, 3);
-
--- Sample locations for Bob's Economics route (route_id = 4)
-INSERT INTO locations (name, latitude, longitude, route_id) VALUES
-  ('Northeast Dorms', 42.3951, -72.5230, 4),
-  ('Thompson Hall', 42.3917, -72.5291, 4);
+INSERT INTO routes (name, stops, user_id) VALUES
+  ('Monday Classes', '[1,2]', 1),
+  ('Tuesday Classes', '[2,3]', 1),
+  ('Lab Route', '[1,3]', 2),
+  ('Economics Route', '[3,4]', 3);

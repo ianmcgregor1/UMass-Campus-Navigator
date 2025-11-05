@@ -51,11 +51,11 @@ router.get('/:userId/routes/:routeId', (req, res) => {
 // CREATE new route for a user
 router.post('/:userId/routes', (req, res) => {
   const { userId } = req.params;
-  const { name } = req.body;
+  const { name, stops } = req.body;
   
   db.query(
-    'INSERT INTO routes (name, user_id) VALUES (?, ?)',
-    [name, userId],
+    'INSERT INTO routes (name, stops, user_id) VALUES (?, ?)',
+    [name, stops, userId],
     (err, results) => {
       if (err) {
         return res.status(500).json({ error: err.message });
@@ -63,7 +63,8 @@ router.post('/:userId/routes', (req, res) => {
       res.status(201).json({
         id: results.insertId,
         name,
-        user_id: parseInt(userId)
+        stops,
+        userId
       });
     }
   );
