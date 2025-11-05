@@ -70,7 +70,7 @@ router.get('/:userId/routes/:routeId/locations/:locationId', (req, res) => {
 // CREATE new location for a route (must belong to user)
 router.post('/:userId/routes/:routeId/locations', (req, res) => {
   const { userId, routeId } = req.params;
-  const { name, latitude, longitude } = req.body;
+  const { name, location, type } = req.body;
   
   // Verify route belongs to user
   db.query(
@@ -86,8 +86,8 @@ router.post('/:userId/routes/:routeId/locations', (req, res) => {
       
       // Create location
       db.query(
-        'INSERT INTO locations (name, latitude, longitude, route_id) VALUES (?, ?, ?, ?)',
-        [name, latitude, longitude, routeId],
+        'INSERT INTO locations (name, location, type, route_id) VALUES (?, ?, ?, ?)',
+        [name, location, type, routeId],
         (err, results) => {
           if (err) {
             return res.status(500).json({ error: err.message });
@@ -95,8 +95,8 @@ router.post('/:userId/routes/:routeId/locations', (req, res) => {
           res.status(201).json({
             id: results.insertId,
             name,
-            latitude,
-            longitude,
+            location,
+            type,
             route_id: parseInt(routeId)
           });
         }
@@ -108,7 +108,7 @@ router.post('/:userId/routes/:routeId/locations', (req, res) => {
 // UPDATE location (route must belong to user)
 router.put('/:userId/routes/:routeId/locations/:locationId', (req, res) => {
   const { userId, routeId, locationId } = req.params;
-  const { name, latitude, longitude } = req.body;
+  const { name, location, type } = req.body;
   
   // Verify route belongs to user
   db.query(
@@ -124,8 +124,8 @@ router.put('/:userId/routes/:routeId/locations/:locationId', (req, res) => {
       
       // Update location
       db.query(
-        'UPDATE locations SET name = ?, latitude = ?, longitude = ? WHERE id = ? AND route_id = ?',
-        [name, latitude, longitude, locationId, routeId],
+        'UPDATE locations SET name = ?, location = ?, type = ? WHERE id = ? AND route_id = ?',
+        [name, location, type, locationId, routeId],
         (err, results) => {
           if (err) {
             return res.status(500).json({ error: err.message });
