@@ -1,5 +1,6 @@
--- Create database
-CREATE DATABASE IF NOT EXISTS umass_navigator;
+-- Drop and create database for clean setup
+DROP DATABASE IF EXISTS umass_navigator;
+CREATE DATABASE umass_navigator;
 USE umass_navigator;
 
 -- Users table
