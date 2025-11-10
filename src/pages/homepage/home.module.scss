@@ -1,12 +1,18 @@
 .border {
-  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
 }
+
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 0.5rem;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid transparent;
 }
 
 .title {
@@ -19,37 +25,124 @@
 .content {
   display: flex;
   width: 100%;
-  height: 500px;
+  flex: 1 1 auto;
+  min-height: 400px;
   margin-top: 1rem;
   border: 1px solid black;
 }
 
 .mapContainer {
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 55%;
   width: 60%;
-  padding: 0px 20px 10px 20px;
+  padding: 0px 20px 30px 20px;
+  min-height: 0;
 }
 
 .routeSelector {
-  height: 30px;
-  margin: 8px;
+  height: 1.875rem;
+  margin: 0.5rem;
   border: 1px solid black;
 }
 
 .map {
-  height: 450px;
-  border: 1px solid black;
+  flex: 1 1 auto;
+  min-height: 0;
+  border: 1px solid green;
 }
 
 .routeCreator {
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
   width: 40%;
-  padding: 0px 10px 10px 10px;
+  padding: 0px 20px 30px 20px;
   border-left: 1px solid black;
+  min-height: 0;
+}
+.stopsList {
+  margin-top: 10px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  border: 1px solid black;
+  padding: 5px;
 }
 
 .routeInfo {
   margin-top: 10px;
   width: 100%;
-  height: 30px;
+  height: 1.875rem;
+}
+
+.stopsList {
+  margin-top: 10px;
+  height: calc(75% - 2rem);
+  overflow-y: auto;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.stop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background-color: lightgray;
+  border: 1px solid black;
+  margin-bottom: 5px;
+  height: 2.5rem;
+}
+
+.stopName {
+  font-size: 12pt;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.stopType {
+  font-size: 10pt;
+  font-style: italic;
+  text-transform: capitalize;
+}
+
+.addStopContainer {
+  margin-top: 10px;
+  height: 1.875rem;
+  text-align: center;
+  align-items: center;
+}
+
+.addStopButton {
+  height: 1.875rem;
+  width: 100px;
+  font-size: 10pt;
+  cursor: pointer;
+}
+
+.routeButtons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.routeButton {
+  height: 1.875rem;
+  width: 80px;
+  font-size: 10pt;
+  color: white;
+  font-weight: bold;
+  background-color: #03adc4;
+  cursor: pointer;
+}
+
+.saveButton {
+  height: 1.875rem;
+  width: 100px;
+  font-size: 10pt;
+  color: white;
+  font-weight: bold;
+  background-color: #4CAF50;
+  cursor: pointer;
 }

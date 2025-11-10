@@ -2,6 +2,7 @@
 import React from 'react';
 import NavBar from './components/nav-bar';
 import Main from './pages';
+import styles from '../src/pages/globals.scss';
 //import AboutPage from './pages/AboutPage';
 //import ContactPage from './pages/ContactPage';
 
