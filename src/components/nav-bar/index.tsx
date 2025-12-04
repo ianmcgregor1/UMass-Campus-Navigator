@@ -2,7 +2,11 @@ import React from 'react';
 import styles from './nav.module.scss'
 import { Link } from "react-router-dom";
 
-
+/**
+ * This is the NavBar component that provides navigation links to different pages.
+ * Should be updated whenever new pages are added to the application.
+ * @returns NavBar component
+ */
 const NavBar = () => {
   return (
     <div className={styles.container}>
