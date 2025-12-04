@@ -7,7 +7,11 @@ import { Location } from '../../models/location';
 import Select from 'react-select';
 import Directions from '../../components/directions';
 
-
+/**
+ * This is the HomePage component that serves as the main interface for users to plan routes on campus.
+ * It is both the landing page for the application and the page where users can create and view routes.
+ * @returns home page component
+ */
 export default function HomePage() {
 
   const apiKey = process.env.REACT_APP_API_KEY;
@@ -61,6 +65,11 @@ export default function HomePage() {
     setLocations(mockLocations);
   }, [/* Dependancy array */]);
 
+
+  /**
+   * Function to handle up button click for reordering stops
+   * @param index the index of the stop
+   */
   function upButtonClick(index: number) {
     if (index === 0) return;
     const newStops = [...selectedStops];
@@ -68,6 +77,10 @@ export default function HomePage() {
     setSelectedStops(newStops);
   }
 
+  /**
+   * Function to handle down button click for reordering stops
+   * @param index the index of the stop
+   */
   function downButtonClick(index: number) {
     if (index === selectedStops.length-1) return;
     const newStops = [...selectedStops];
@@ -75,6 +88,10 @@ export default function HomePage() {
     setSelectedStops(newStops);  
   }
 
+  /**
+   * Function to handle route selection from dropdown - sets the current route and selected stops to populate the creator
+   * @param selectedOption the route selected from the dropdown
+   */
   function onRouteSelected(selectedOption: any) {
     const route = savedRoutes.find(r => r.id === selectedOption.value);
     if (!route) return;
@@ -83,7 +100,11 @@ export default function HomePage() {
     setRouteSelected(true);
   }
 
-  async function goButtonClick(useCreatedRoute: boolean) {
+  /**
+   * Function to handle 'Start' button click - passes the stops in the creator to the Directions component
+   * @returns 
+   */
+  async function goButtonClick() {
 
 
     let routeLocations: Location[] = [];
@@ -91,30 +112,17 @@ export default function HomePage() {
     // TODO - replace selectedStops with an array of Location objects
     // Should do this once route builder is functional - IDs are easier for placeholder data conciseness
 
-    if (useCreatedRoute) {
-      console.log("Using created route: ", selectedStops);
-      // If using created route, use selectedStops
-      if (selectedStops.length < 2) {
-        alert("Please select at least two stops to create a route.");
-        return;
-      }
-      
-      routeLocations = selectedStops.map(stopId => {
-        const loc = locations.find(location => location.id === stopId);
-        return loc ? loc : null;
-      }).filter(loc => loc !== null) as Location[];
-
-    } /*else {
-
-      if (!routeSelected || !currentRoute) {
-        return;
-      }
-      // Otherwise, use currentRoute stops
-      routeLocations = currentRoute.stops.map(stopId => {
-        const loc = locations.find(location => location.id === stopId);
-        return loc ? loc : null;
-      }).filter(loc => loc !== null) as Location[];
-    }*/
+    console.log("Using created route: ", selectedStops);
+    // If using created route, use selectedStops
+    if (selectedStops.length < 2) {
+      alert("Please select at least two stops to create a route.");
+      return;
+    }
+    
+    routeLocations = selectedStops.map(stopId => {
+      const loc = locations.find(location => location.id === stopId);
+      return loc ? loc : null;
+    }).filter(loc => loc !== null) as Location[];
     
     console.log("Route locations: ", routeLocations);
     setShowDirections(true);
@@ -136,16 +144,13 @@ export default function HomePage() {
                 className={styles.routeSelector}
                 options={savedRoutes.map(route => ({ value: route.id, label: route.name }))}
                 onChange={onRouteSelected}
+                placeholder="Select a Route..."
               />
             </div>
             <div className={styles.map}>
               {<APIProvider apiKey={apiKey || ''}>
                 <Map
-                  style={{width: '100%', height: '100%'}}
-                  defaultCenter={{lat: 42.389971817134544, lng: -72.52622911098678}}
-                  defaultZoom={16}
-                  gestureHandling='greedy'
-                  disableDefaultUI
+                  {...mapOptions}
                 >
                   {selectedStops && selectedStops.length >= 2 && showDirections && (
                     <Directions 
@@ -183,7 +188,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className={styles.routeButtons}>
-              <button className={styles.routeButton} onClick={() => goButtonClick(true)}>Start › </button>
+              <button className={styles.routeButton} onClick={() => goButtonClick()}>Start › </button>
               <button className={styles.saveButton}>Save Route</button>
             </div>
             <div className={styles.routeInfo}>

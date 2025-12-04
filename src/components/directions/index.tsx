@@ -5,7 +5,13 @@ import { Route } from '../../models/route';
 import { Location } from '../../models/location';
 import Select from 'react-select';
 
-
+/**
+ * This is the Directions component that provides routing functionality using Google Maps API.
+ * It takes in a list of locations and displays the route on its parent Map component.
+ * This code is based on the example from vis.gl's react-google-maps library.
+ * @param locations List of locations to get directions for
+ * @returns Directions component that displays route on map and duration info
+ */
 export default function Directions({ locations }: { locations: Location[]}) {
   const map = useMap();
   const routesLibrary = useMapsLibrary('routes');
@@ -17,7 +23,7 @@ export default function Directions({ locations }: { locations: Location[]}) {
   const selected = routes[0];
   const leg = selected?.legs[0];
 
-  // Initialize directions service and renderer
+  // useEffect to initialize directions service and renderer
   useEffect(() => {
     if (!routesLibrary || !map) return;
     setDirectionsService(new routesLibrary.DirectionsService());
@@ -28,11 +34,10 @@ export default function Directions({ locations }: { locations: Location[]}) {
     );
   }, [routesLibrary, map]);
 
-  // Add the following useEffect to make markers draggable
+  // useEffect to listen for directions changes
   useEffect(() => {
     if (!directionsRenderer) return;
 
-    // Add the listener to update routes when directions change
     const listener = directionsRenderer.addListener(
       'directions_changed',
       () => {
@@ -78,6 +83,7 @@ export default function Directions({ locations }: { locations: Location[]}) {
     return () => directionsRenderer.setMap(map);
   }, [directionsService, directionsRenderer, locations, map]);
 
+  // useEffect to log routes when they are updated
   useEffect(() => {
     console.log("Routes updated:", routes);
   }, [routes]);
