@@ -14,8 +14,7 @@ export default function Directions({ locations }: { locations: Location[]}) {
   const [directionsRenderer, setDirectionsRenderer] =
     useState<google.maps.DirectionsRenderer>();
   const [routes, setRoutes] = useState<google.maps.DirectionsRoute[]>([]);
-  const [routeIndex, setRouteIndex] = useState(0);
-  const selected = routes[routeIndex];
+  const selected = routes[0];
   const leg = selected?.legs[0];
 
   // Initialize directions service and renderer
@@ -30,7 +29,7 @@ export default function Directions({ locations }: { locations: Location[]}) {
   }, [routesLibrary, map]);
 
   // Add the following useEffect to make markers draggable
-  /*useEffect(() => {
+  useEffect(() => {
     if (!directionsRenderer) return;
 
     // Add the listener to update routes when directions change
@@ -45,10 +44,11 @@ export default function Directions({ locations }: { locations: Location[]}) {
     );
 
     return () => google.maps.event.removeListener(listener);
-  }, [directionsRenderer]);*/
+  }, [directionsRenderer]);
 
   // Use directions service
   useEffect(() => {
+    console.log("UE2", locations);
     if (!directionsService || !directionsRenderer) return;
 
     // Convert location list to proper lat/lng objects
@@ -58,6 +58,8 @@ export default function Directions({ locations }: { locations: Location[]}) {
       location: loc.location,
       stopover: true
     }));
+
+    console.log("Requesting route with origin:", origin, "destination:", destination, "waypoints:", waypoints);
 
     directionsService
       .route({
@@ -73,26 +75,18 @@ export default function Directions({ locations }: { locations: Location[]}) {
         setRoutes(response.routes);
       });
 
-    return () => directionsRenderer.setMap(null);
-  }, [directionsService, directionsRenderer, locations]);
+    return () => directionsRenderer.setMap(map);
+  }, [directionsService, directionsRenderer, locations, map]);
 
-  // Update direction route
   useEffect(() => {
-    if (!directionsRenderer) return;
-    directionsRenderer.setRouteIndex(routeIndex);
-  }, [routeIndex, directionsRenderer]);
+    console.log("Routes updated:", routes);
+  }, [routes]);
 
   if (!leg) return null;
 
   return (
     <div className="directions">
-      <h2>{selected.summary}</h2>
-      <p>
-        {leg.start_address.split(',')[0]} to {leg.end_address.split(',')[0]}
-      </p>
-      <p>Distance: {leg.distance?.text}</p>
       <p>Duration: {leg.duration?.text}</p>
-
     </div>
   );
 }

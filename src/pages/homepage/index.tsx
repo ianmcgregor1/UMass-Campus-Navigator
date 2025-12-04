@@ -77,6 +77,8 @@ export default function HomePage() {
 
   function onRouteSelected(selectedOption: any) {
     const route = savedRoutes.find(r => r.id === selectedOption.value);
+    if (!route) return;
+    setSelectedStops(route.stops);
     setCurrentRoute(route);
     setRouteSelected(true);
   }
@@ -90,16 +92,19 @@ export default function HomePage() {
     // Should do this once route builder is functional - IDs are easier for placeholder data conciseness
 
     if (useCreatedRoute) {
+      console.log("Using created route: ", selectedStops);
       // If using created route, use selectedStops
-      if (selectedStops.length === 0) {
+      if (selectedStops.length < 2) {
+        alert("Please select at least two stops to create a route.");
         return;
       }
+      
       routeLocations = selectedStops.map(stopId => {
         const loc = locations.find(location => location.id === stopId);
         return loc ? loc : null;
       }).filter(loc => loc !== null) as Location[];
 
-    } else {
+    } /*else {
 
       if (!routeSelected || !currentRoute) {
         return;
@@ -109,8 +114,9 @@ export default function HomePage() {
         const loc = locations.find(location => location.id === stopId);
         return loc ? loc : null;
       }).filter(loc => loc !== null) as Location[];
-    }
+    }*/
     
+    console.log("Route locations: ", routeLocations);
     setShowDirections(true);
     setLocationsToShow(routeLocations);
   }
@@ -131,7 +137,6 @@ export default function HomePage() {
                 options={savedRoutes.map(route => ({ value: route.id, label: route.name }))}
                 onChange={onRouteSelected}
               />
-              <button className={styles.goButton} onClick={() => goButtonClick(false)}>Go ›</button>
             </div>
             <div className={styles.map}>
               {<APIProvider apiKey={apiKey || ''}>
@@ -142,9 +147,9 @@ export default function HomePage() {
                   gestureHandling='greedy'
                   disableDefaultUI
                 >
-                  {routeSelected && currentRoute && showDirections && (
+                  {selectedStops && selectedStops.length >= 2 && showDirections && (
                     <Directions 
-                      locations={[]}
+                      locations={locationsToShow}
                     />
                   )}
                 </Map>
