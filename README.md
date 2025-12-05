@@ -5,9 +5,10 @@ UMass Campus Navigator is a web-based application designed to help newcomers to 
 # Features
 
 - User Account Management: The application will be account-based, allowing students to log in to see saved schedules and routes.
-- Schedule Management: Users can upload or manually input their schedules
+- Route Management: Users can create and save routes, which can easily be retrieved, modified, and displayed on the map.
+- Schedule Management: Users can upload or manually input their schedules.
 - Multi-Stop Routes: Routes can have a number of stops, as well as including an estimated walking time.
-- Interactive Map: Routes are displayed on a clear, interactive map of the UMass campus
+- Interactive Map: Routes are displayed on a clear, interactive map of the UMass campus.
 
 # Structure
 UMass Campus Navigator is a React-based project. As such, it requires both Node.js (created with v20.11.0) and npm (created with v10.2.4)
