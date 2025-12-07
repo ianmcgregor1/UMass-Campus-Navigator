@@ -1,3 +1,14 @@
+/**
+ * Schedule-Builder implemented solely by Nicholas Ankiewicz
+ * 
+ * Credits / References
+ * - React Router “Contacts” Tutorial (CRUD, routing, forms, delete flows): https://reactrouter.com/en/main/start/tutorial
+ * - React Select docs (select input patterns, grouped/async options): https://react-select.com/home
+ * - MDN Express (Node.js/Express backend patterns & CRUD routing): https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs
+ * - react-beautiful-dnd (archived, still a clear API reference): https://github.com/atlassian/react-beautiful-dnd
+ * - Dnd Kit (modern alternative for sortable lists): https://dndkit.com/
+ * - Thinking in React (component breakdown, grouped lists, state lifting): https://react.dev/learn/thinking-in-react
+ */
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useBeforeUnload } from 'react-router-dom';
 import styles from './schedule-builder.module.scss';
