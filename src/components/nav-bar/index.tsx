@@ -18,6 +18,13 @@ const NavBar = () => {
         </Link>
       </div>
       <div className={styles.navItem}>
+        <Link to='/schedule-builder'>
+          <button className={styles.navLink}>
+            Schedule Builder
+          </button>
+        </Link>
+      </div>
+      <div className={styles.navItem}>
         <Link to='/account'>
           <button className={styles.navLink}>
             Account
