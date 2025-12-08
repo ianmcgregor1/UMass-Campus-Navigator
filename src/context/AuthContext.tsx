@@ -1,3 +1,12 @@
+/**
+ * Credits / References:
+ * - React Context API documentation: https://react.dev/reference/react/createContext
+ * - React useContext hook: https://react.dev/reference/react/useContext
+ * - MDN Web Storage API (localStorage): https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+ * - React TypeScript patterns: https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/context
+ * - React Context for Beginners tutorial: https://www.freecodecamp.org/news/react-context-for-beginners/
+ * - Managing User Authentication in React: https://blog.logrocket.com/managing-user-authentication-in-react/
+ */
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface User {
