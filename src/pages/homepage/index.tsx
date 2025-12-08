@@ -1,5 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import styles from './home.module.scss';
 import { APIProvider, Map, useMapsLibrary } from '@vis.gl/react-google-maps';
 import { Route } from '../../models/route';
@@ -13,6 +15,18 @@ import Directions from '../../components/directions';
  * @returns home page component
  */
 export default function HomePage() {
+  const { isLoggedIn, user } = useAuth();
+  const navigate = useNavigate();
+
+  // Redirect to account page if not logged in
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/account');
+    }
+  }, [isLoggedIn, navigate]);
+
+  // Get logged-in user's ID
+  const userId = user?.id;
 
   const apiKey = process.env.REACT_APP_API_KEY;
 

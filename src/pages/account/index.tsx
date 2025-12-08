@@ -1,11 +1,11 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import styles from './account.module.scss';
 
 function AccountPage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, user, login, logout } = useAuth();
   const [isRegistering, setIsRegistering] = useState(false);
-  const [user, setUser] = useState<{ id: number; name: string; email: string } | null>(null);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -13,20 +13,6 @@ function AccountPage() {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    // Check if user is already logged in
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      try {
-        const parsedUser = JSON.parse(storedUser);
-        setUser(parsedUser);
-        setIsLoggedIn(true);
-      } catch (e) {
-        localStorage.removeItem('user');
-      }
-    }
-  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -56,9 +42,7 @@ function AccountPage() {
       const data = await response.json();
 
       if (response.ok) {
-        setUser(data.user);
-        setIsLoggedIn(true);
-        localStorage.setItem('user', JSON.stringify(data.user));
+        login(data.user || data);
         setFormData({ email: '', password: '', name: '' });
       } else {
         setError(data.error || 'Login failed');
@@ -91,9 +75,7 @@ function AccountPage() {
       const data = await response.json();
 
       if (response.ok) {
-        setUser(data.user);
-        setIsLoggedIn(true);
-        localStorage.setItem('user', JSON.stringify(data.user));
+        login(data.user || data);
         setFormData({ email: '', password: '', name: '' });
       } else {
         setError(data.error || 'Registration failed');
@@ -106,9 +88,7 @@ function AccountPage() {
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUser(null);
-    localStorage.removeItem('user');
+    logout();
     setFormData({ email: '', password: '', name: '' });
   };
 
