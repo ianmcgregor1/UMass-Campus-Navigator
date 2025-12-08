@@ -212,8 +212,6 @@ function AccountPage() {
         </div>
 
         <div className={styles.navRight}>
-          <button className={styles.navButton}>Edit Profile</button>
-          <button className={styles.navButton}>Settings</button>
           <button className={styles.navButton}>Help</button>
           <button className={styles.navButton} onClick={handleLogout}>Logout</button>
         </div>
@@ -232,12 +230,23 @@ function AccountPage() {
 
         <div className={styles.contentArea}>
           <h3>Account Overview</h3>
-
-          <p>Here's where you can see your current schedule.</p>
-          <button className={styles.contentButton}>Your Schedule</button>
-
-          <p>Here's where you can see your previous routes.</p>
-          <button className={styles.contentButton}>Your Routes</button>
+          
+          <div className={styles.accountInfo}>
+            <div className={styles.infoRow}>
+              <span className={styles.infoLabel}>Username:</span>
+              <span className={styles.infoValue}>{user?.name || 'Not available'}</span>
+            </div>
+            
+            <div className={styles.infoRow}>
+              <span className={styles.infoLabel}>Email:</span>
+              <span className={styles.infoValue}>{user?.email || 'Not available'}</span>
+            </div>
+            
+            <div className={styles.infoRow}>
+              <span className={styles.infoLabel}>User ID:</span>
+              <span className={styles.infoValue}>{user?.id || 'Not available'}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
