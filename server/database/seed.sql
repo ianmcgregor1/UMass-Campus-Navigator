@@ -3,9 +3,10 @@ USE umass_navigator;
 
 -- Sample users (password is 'password123' for all)
 INSERT INTO users (name, email, passwordHash) VALUES 
-  ('John Smith', 'sample email 1', 'password123'),
-  ('Jane Doe', 'sample email 2', 'password123'),
-  ('Bob Wilson', 'sample email 3', 'password123');
+  ('Test Username', 'test@umass.edu', 'test'),
+  ('John Smith', 'john.smith@umass.edu', 'password123'),
+  ('Jane Doe', 'jane.doe@umass.edu', 'password123'),
+  ('Bob Wilson', 'bob.wilson@umass.edu', 'password123');
 
 
 -- Sample locations
