@@ -88,6 +88,19 @@ The name of the folder should be the URL extension used to access that page
   - Backend API runs at `http://localhost:5000`
 - Alternatively: `npm start` for frontend only, or `npm run server` for backend only
 
+### Connecting to Google Maps API
+You will need to create a .env.local file in the root folder. This file should contain the following:
+REACT_APP_API_KEY = "YOUR_KEY"
+For the mapping to work properly, YOUR_KEY must be a valid Google Maps API key with the following APIs enabled:
+- Maps Embed API
+- Maps JavaScript API
+- Maps Static API
+- Navigation SDK
+- Routes API
+- Places API
+- Directions API
+- Geolocation API
+
 ### Test Login Credentials
 After running `npm run setup-db`, use these credentials to login:
 - **Email**: `test@umass.edu`
