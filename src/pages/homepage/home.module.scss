@@ -35,7 +35,7 @@
   display: flex;
   flex-direction: column;
   flex: 0 0 55%;
-  width: 60%;
+  width: 65%;
   padding: 0px 20px 30px 20px;
   min-height: 0;
 }
@@ -60,11 +60,12 @@
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  width: 40%;
+  width: 35%;
   padding: 0px 20px 30px 20px;
   border-left: 1px solid black;
   min-height: 0;
 }
+
 .stopsList {
   margin-top: 10px;
   flex: 1 1 auto;
@@ -90,7 +91,6 @@
 
 .stop {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 5px;
   background-color: lightgray;
@@ -99,16 +99,33 @@
   height: 2.5rem;
 }
 
+.stopInfo {
+  width: 60%;
+  min-width: 200px;
+}
+
 .stopName {
   font-size: 12pt;
   font-weight: bold;
   text-transform: capitalize;
+  width: 100%;
 }
 
 .stopType {
   font-size: 10pt;
   font-style: italic;
   text-transform: capitalize;
+}
+
+.reorderButtons {
+  display: flex;
+  width: calc(40% - 80px);
+  min-width: 60px;
+  align-items: center;
+}
+
+.otherButtons {
+  width: 70px;
 }
 
 .addStopContainer {

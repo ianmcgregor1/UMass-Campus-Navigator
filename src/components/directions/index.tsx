@@ -10,9 +10,15 @@ import Select from 'react-select';
  * It takes in a list of locations and displays the route on its parent Map component.
  * This code is based on the example from vis.gl's react-google-maps library.
  * @param locations List of locations to get directions for
+ * @param onDurationChange function to be applied when the route's duration updates
  * @returns Directions component that displays route on map and duration info
  */
-export default function Directions({ locations }: { locations: Location[]}) {
+export default function Directions({ locations, onDurationChange }: 
+{ 
+  locations: Location[], 
+  onDurationChange: (duration: google.maps.Duration | undefined) => void
+}) 
+{
   const map = useMap();
   const routesLibrary = useMapsLibrary('routes');
   const [directionsService, setDirectionsService] =
@@ -20,6 +26,7 @@ export default function Directions({ locations }: { locations: Location[]}) {
   const [directionsRenderer, setDirectionsRenderer] =
     useState<google.maps.DirectionsRenderer>();
   const [routes, setRoutes] = useState<google.maps.DirectionsRoute[]>([]);
+  const [duration, setDuration] = useState<google.maps.Duration | undefined>();
   const selected = routes[0];
   const leg = selected?.legs[0];
 
@@ -86,13 +93,18 @@ export default function Directions({ locations }: { locations: Location[]}) {
   // useEffect to log routes when they are updated
   useEffect(() => {
     console.log("Routes updated:", routes);
+    setDuration(routes[0]?.legs[0]?.duration);
   }, [routes]);
+
+  // Update duration whenever it is changed
+  useEffect(() => {
+    onDurationChange(duration);
+  }, [duration]);
 
   if (!leg) return null;
 
   return (
     <div className="directions">
-      <p>Duration: {leg.duration?.text}</p>
     </div>
   );
 }

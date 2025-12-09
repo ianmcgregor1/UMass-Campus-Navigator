@@ -31,6 +31,11 @@ interface Route {
   user_id: number;
 }
 
+/**
+ * This is the ScheduleBuilderPage component that allows users to create, edit, and manage their routes.
+ * It serves as the main interface for customizing routes
+ * @returns ScheduleBuilderPage
+ */
 function ScheduleBuilderPage() {
   const { isLoggedIn, user } = useAuth();
   const navigate = useNavigate();
