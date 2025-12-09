@@ -167,3 +167,4 @@ GET    /api/locations          Get all campus locations
 ## Running Tests ##
 - `npm test` launches the test runner in the interactive watch mode
    - See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `npm run test:backend` runs Jest mock tests on the backend of the project.
