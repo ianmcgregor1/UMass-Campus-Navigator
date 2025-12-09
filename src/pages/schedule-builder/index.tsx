@@ -11,6 +11,7 @@
  */
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useBeforeUnload } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import styles from './schedule-builder.module.scss';
 
 interface Location {
@@ -36,8 +37,18 @@ interface Route {
  * @returns ScheduleBuilderPage
  */
 function ScheduleBuilderPage() {
-  // Hardcoded userId for testing (until login is implemented)
-  const userId = 1;
+  const { isLoggedIn, user } = useAuth();
+  const navigate = useNavigate();
+  
+  // Redirect to account page if not logged in
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/account');
+    }
+  }, [isLoggedIn, navigate]);
+
+  // Use logged-in user's ID instead of hardcoded value
+  const userId = user?.id || 1;
 
   // State management
   const [allLocations, setAllLocations] = useState<Location[]>([]);
