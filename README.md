@@ -164,7 +164,44 @@ GET    /api/locations          Get all campus locations
   - `logout()`: Function to clear authentication state
 ```
 
-## Running Tests ##
-`npm run test` is utilized to run test cases for this project
+## Testing ##
 
-- `npm run test:backend` runs Jest mock tests on the backend of the project. 3 test suites are used for locations, routes, and users
+### Setup
+All test dependencies are installed with `npm install`. For E2E tests, you also need to install browsers:
+```bash
+npx playwright install
+```
+
+### Frontend Unit Tests (Jest + React Testing Library)
+```bash
+npm run test:frontend
+```
+Tests components, authentication context, and user interactions:
+- `tests/Frontend/NavBar.test.tsx` - Navigation component
+- `tests/Frontend/AuthContext.test.tsx` - Authentication state management
+- `tests/Frontend/AccountPage.test.tsx` - Login/register forms
+- `tests/Frontend/HomePage.test.tsx` - Route planning page
+
+### Backend API Tests (Jest + Supertest)
+```bash
+npm run test:backend
+```
+Tests API endpoints and database operations:
+- `tests/Backend/locations.test.js` - Location endpoints
+- `tests/Backend/routes.test.js` - Route CRUD operations
+- `tests/Backend/users.test.js` - User authentication and management
+
+### End-to-End Tests (Playwright)
+```bash
+npm run test:e2e
+```
+Tests complete user flows across Chromium, Firefox, and WebKit:
+- `tests/e2e/user-flows.spec.ts` - Login, registration, navigation, logout
+- `tests/e2e/route-management.spec.ts` - Page navigation and responsive design
+
+**Note:** E2E tests automatically start the dev server before running.
+
+### Run All Tests
+```bash
+npm run test:all
+```
