@@ -4,6 +4,16 @@ jest.mock("../../server/config/db");
 const db = require("../../server/config/db");
 const app = require("../../server/server");
 
+// Mock mysql2 to prevent connection hanging
+jest.mock('mysql2', () => ({
+    createConnection: jest.fn(() => ({
+        connect: jest.fn((cb) => cb && cb()),
+        query: jest.fn(),
+        end: jest.fn(),
+        destroy: jest.fn()
+    }))
+}));
+
 describe("users API", () => {
     afterEach(() => {
         jest.clearAllMocks();

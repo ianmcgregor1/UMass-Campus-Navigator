@@ -164,7 +164,60 @@ GET    /api/locations          Get all campus locations
   - `logout()`: Function to clear authentication state
 ```
 
-## Running Tests ##
-`npm run test` is utilized to run test cases for this project
+## Testing ##
 
-- `npm run test:backend` runs Jest mock tests on the backend of the project. 3 test suites are used for locations, routes, and users
+### Setup
+All test dependencies are installed with `npm install`. For E2E tests, you also need to install browsers:
+```bash
+npx playwright install
+```
+
+### Frontend Unit Tests (Jest + React Testing Library)
+```bash
+npm run test:frontend
+```
+**14 tests** covering components, authentication context, and user interactions:
+- `tests/Frontend/NavBar.test.tsx` - Navigation component (2 tests)
+- `tests/Frontend/AuthContext.test.tsx` - Authentication state management (4 tests)
+- `tests/Frontend/AccountPage.test.tsx` - Login/register forms (4 tests)
+- `tests/Frontend/HomePage.test.tsx` - Route planning page (4 tests)
+
+### Backend API Tests (Jest + Supertest)
+```bash
+npm run test:backend
+```
+**19 tests** validating API endpoints and database operations:
+- `tests/Backend/users.test.js` - User authentication and management (8 tests)
+- `tests/Backend/routes.test.js` - Route CRUD operations (11 tests)
+- `tests/Backend/locations.test.js` - Location endpoints
+
+### End-to-End Tests (Playwright)
+```bash
+npm run test:e2e
+```
+**51 tests** across 3 browsers (Chromium, Firefox, WebKit):
+
+**User Flows** (6 tests):
+- Authentication: Login, registration, form switching, error handling
+- Navigation: Navbar display, authentication redirects
+
+**Responsive Design** (2 tests):
+- Mobile and tablet viewport testing
+
+**Schedule Builder - Route Management** (9 tests):
+- Create and save new routes
+- Edit existing routes
+- Delete routes
+- Multi-stop routes
+- Reset functionality
+- Form validation (route name and location requirements)
+
+**Schedule Builder - Backend Integration** (1 test):
+- Route persistence after page reload
+
+**Note:** E2E tests automatically start the dev server before running and use real backend integration at `localhost:5000`.
+
+### Run All Tests
+```bash
+npm run test:all
+```
