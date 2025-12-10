@@ -31,6 +31,9 @@ const NavBar = () => {
           </button>
         </Link>
       </div>
+      <div className={styles.title}>
+        UMass Campus Navigator
+      </div>
     </div>
   );
 }

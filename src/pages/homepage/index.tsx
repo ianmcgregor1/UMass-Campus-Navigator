@@ -30,32 +30,17 @@ export default function HomePage() {
 
   const apiKey = process.env.REACT_APP_API_KEY;
 
-  /*const mockRoutes = [
-    { id: 1, name: 'Route 1', stops: [0, 1, 2] },
-    { id: 2, name: 'Route 2', stops: [2, 3, 4] },
-  ] as Route[];
-
-  const mockLocations = [
-    { id: 0, name: 'Location 1', location: { lat: 42.389971817134544, lng: -72.52622911098678 }, type: 'academic' },
-    { id: 1, name: 'Location 2', location: { lat: 42.3908, lng: -72.5267 }, type: 'academic' },
-    { id: 2, name: 'Location 3', location: { lat: 42.3914, lng: -72.5258 }, type: 'academic' },
-    { id: 3, name: 'Location 4', location: { lat: 42.3900, lng: -72.5289 }, type: 'academic' },
-    { id: 4, name: 'Location 5', location: { lat: 42.3925, lng: -72.5242 }, type: 'residential' },
-  ] as Location[];*/
-
-  //const userId = 1; // TODO - replace with actual user ID from login
+  const { logout } = useAuth();
 
   const [savedRoutes, setSavedRoutes] = useState<Array<Route>>([]);
   const [locations, setLocations] = useState<Array<Location>>([]);
   const [selectedLocations, setSelectedLocations] = useState<Array<Location>>([]);
-  const [departureTime, setDepartureTime] = useState<string>(Date.now().toString());
   const [routeSelected, setRouteSelected] = useState<boolean>(false);
   const [locationsToShow, setLocationsToShow] = useState<Location[]>([]);
   const [showDirections, setShowDirections] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [duration, setDuration] = useState<google.maps.Duration | undefined>(undefined);
   const [arrivalTime, setArrivalTime] = useState<Date | undefined>(undefined);
   
@@ -81,13 +66,6 @@ export default function HomePage() {
     location: { lat: 42.389971817134544, lng: -72.52622911098678 },
     type: 'unknown'
   } as Location;
-
-  /*const routeOptions = {
-    travelMode: 'WALK',
-    polylineQuality: 'HIGH_QUALITY',
-    computeAlternativeRoutes: false,
-    units: 'IMPERIAL'
-  };*/
 
   // Fetch all locations and user routes on mount
   useEffect(() => {
@@ -248,18 +226,24 @@ export default function HomePage() {
     setLocationsToShow(routeLocations);
   }
 
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <div className={styles.border}>
       
       <div className={styles.container}>
-        <div className={styles.title}>
-          Start Planning Your Route:
-
+        <div className={styles.accountNAV}>
+          
+          <div className={styles.navCenter}>
+            <h2>Start Planning Your Route:</h2>
+          </div>
         </div>
         <div className={styles.content}>
 
           <div className={styles.mapContainer}>
-            <div className={styles.selecterContainer}>
+            <div className={styles.selectorContainer}>
               <Select
                 className={styles.routeSelector}
                 options={savedRoutes.map(route => ({ value: route.id, label: route.name }))}
@@ -283,7 +267,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className={styles.routeCreator}>
-            Create a new route:
+            {routeSelected ? "Edit Your Route:" : "Your Route Will Appear Below:"}
             <div className={styles.stopsList}>
               {selectedLocations.map((stop, index) => (
                 <div key={index} className={styles.stop}>
@@ -309,7 +293,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className={styles.routeButtons}>
-              <button className={styles.routeButton} onClick={() => displayRoute()}>Start › </button>
+              <button className={styles.routeButton} disabled={loading} onClick={() => displayRoute()}>Start › </button>
               {/*<button className={styles.saveButton}>Save Route</button>*/}
             </div>
             <div className={styles.routeInfo}>

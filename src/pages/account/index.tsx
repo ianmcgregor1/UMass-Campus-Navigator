@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import styles from './account.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 function AccountPage() {
   const { isLoggedIn, user, login, logout } = useAuth();
@@ -13,6 +14,7 @@ function AccountPage() {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -51,6 +53,7 @@ function AccountPage() {
       setError('Network error. Please try again.');
     } finally {
       setLoading(false);
+      navigate('/');
     }
   };
 
