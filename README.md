@@ -176,30 +176,46 @@ npx playwright install
 ```bash
 npm run test:frontend
 ```
-Tests components, authentication context, and user interactions:
-- `tests/Frontend/NavBar.test.tsx` - Navigation component
-- `tests/Frontend/AuthContext.test.tsx` - Authentication state management
-- `tests/Frontend/AccountPage.test.tsx` - Login/register forms
-- `tests/Frontend/HomePage.test.tsx` - Route planning page
+**14 tests** covering components, authentication context, and user interactions:
+- `tests/Frontend/NavBar.test.tsx` - Navigation component (2 tests)
+- `tests/Frontend/AuthContext.test.tsx` - Authentication state management (4 tests)
+- `tests/Frontend/AccountPage.test.tsx` - Login/register forms (4 tests)
+- `tests/Frontend/HomePage.test.tsx` - Route planning page (4 tests)
 
 ### Backend API Tests (Jest + Supertest)
 ```bash
 npm run test:backend
 ```
-Tests API endpoints and database operations:
+**19 tests** validating API endpoints and database operations:
+- `tests/Backend/users.test.js` - User authentication and management (8 tests)
+- `tests/Backend/routes.test.js` - Route CRUD operations (11 tests)
 - `tests/Backend/locations.test.js` - Location endpoints
-- `tests/Backend/routes.test.js` - Route CRUD operations
-- `tests/Backend/users.test.js` - User authentication and management
 
 ### End-to-End Tests (Playwright)
 ```bash
 npm run test:e2e
 ```
-Tests complete user flows across Chromium, Firefox, and WebKit:
-- `tests/e2e/user-flows.spec.ts` - Login, registration, navigation, logout
-- `tests/e2e/route-management.spec.ts` - Page navigation and responsive design
+**51 tests** across 3 browsers (Chromium, Firefox, WebKit):
 
-**Note:** E2E tests automatically start the dev server before running.
+**User Flows** (6 tests):
+- Authentication: Login, registration, form switching, error handling
+- Navigation: Navbar display, authentication redirects
+
+**Responsive Design** (2 tests):
+- Mobile and tablet viewport testing
+
+**Schedule Builder - Route Management** (9 tests):
+- Create and save new routes
+- Edit existing routes
+- Delete routes
+- Multi-stop routes
+- Reset functionality
+- Form validation (route name and location requirements)
+
+**Schedule Builder - Backend Integration** (1 test):
+- Route persistence after page reload
+
+**Note:** E2E tests automatically start the dev server before running and use real backend integration at `localhost:5000`.
 
 ### Run All Tests
 ```bash
