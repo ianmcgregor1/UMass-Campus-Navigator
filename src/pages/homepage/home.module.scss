@@ -8,18 +8,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 0.5rem;
   height: 100%;
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid transparent;
+  border: 1px solid #4b0f0a;
+}
+
+.accountNAV {
+    display: flex;
+    padding: 0.75rem 2rem;
+    background-color: #4b0f0a;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 4rem);
+}
+
+.navCenter h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: white;
+    margin: 0;
 }
 
 .title {
-  height: 2rem;
+  height: 1.5rem;
   width: 100%;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .content {
@@ -27,8 +42,7 @@
   width: 100%;
   flex: 1 1 auto;
   min-height: 400px;
-  margin-top: 1rem;
-  border: 1px solid black;
+  border: 1px solid #881c1c;;
 }
 
 .mapContainer {
@@ -41,19 +55,18 @@
 }
 
 .selectorContainer {
-  height: 1.875rem;
-  margin: 0.5rem;
-  border: 1px solid black;
+  margin: 10px 0px 10px 0px;
 }
 
 .routeSelector {
-
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .map {
   flex: 1 1 auto;
   min-height: 0;
   border: 1px solid green;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
 }
 
 .routeCreator {
@@ -61,18 +74,10 @@
   flex-direction: column;
   flex: 1 1 auto;
   width: 35%;
-  padding: 0px 20px 30px 20px;
-  border-left: 1px solid black;
+  padding: 5px 20px 30px 20px;
+  border-left: 2px solid #ccc;
   min-height: 0;
-}
-
-.stopsList {
-  margin-top: 10px;
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
-  border: 1px solid black;
-  padding: 5px;
+  
 }
 
 .routeInfo {
@@ -83,10 +88,14 @@
 
 .stopsList {
   margin-top: 10px;
+  flex: 1 1 auto;
+  min-height: 0;
+  background-color: rgb(245, 245, 245);
   height: calc(75% - 2rem);
   overflow-y: auto;
-  border: 1px solid black;
-  padding: 5px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 6px;
 }
 
 .stop {
@@ -95,8 +104,10 @@
   padding: 5px;
   background-color: lightgray;
   border: 1px solid black;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   height: 2.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .stopInfo {
