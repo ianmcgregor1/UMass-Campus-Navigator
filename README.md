@@ -81,7 +81,7 @@ The name of the folder should be the URL extension used to access that page
 - First, ensure you have Node.js (includes npm) and MySQL installed
   - For MySQL: Download from https://dev.mysql.com/downloads/installer/ and choose Developer Default install type
 - Clone the repository and navigate to the project directory
-- Run `npm install` to install dependencies (maybe need to include --legacy-peer-deps)
+- Run `npm install` to install dependencies (might need to include --legacy-peer-deps)
 - Run `npm run setup-db` to create the database and add sample data (only need to run this once)
 - Run `npm run dev` to run both frontend and backend together
   - Frontend runs at `http://localhost:3000`
@@ -165,6 +165,6 @@ GET    /api/locations          Get all campus locations
 ```
 
 ## Running Tests ##
-- `npm test` launches the test runner in the interactive watch mode
-   - See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-- `npm run test:backend` runs Jest mock tests on the backend of the project.
+`npm run test` is utilized to run test cases for this project
+
+- `npm run test:backend` runs Jest mock tests on the backend of the project. 3 test suites are used for locations, routes, and users
